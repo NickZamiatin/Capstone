@@ -1,58 +1,72 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, StyleSheet, TouchableOpacity,ScrollView} from 'react-native';
+import {View, FlatList, Text, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 import CreateElement from './CreateElement';
 import Swipeout from 'react-native-swipeout';
+import { scale as s } from "react-native-size-matters";
+
+import * as Api from './Api';
 
 class Home extends Component {
 
   constructor() {
     super()
     this.timer = 0;
-    this.renderItem = this.renderItem.bind(this)
+    this.renderItem = this.renderItem.bind(this);
+    this.renderEmptyComponent = this.renderEmptyComponent.bind(this);
   }
 
   state = {
-    event : []
+    error: null,
+    loading: true,
   }
 
-  componentDidMount() {
-     this.timer = setInterval(() => {
-      this.setState({
-        events: this.state.events.map(evt => ({
-          ...evt,
-          timer: Date.now(),
-         
-        })),
-      });
-    }, 1000);
+  renderEmptyComponent() {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" />;
+      </View>
+    )
 
-    const events = require('./db.json').events.map(e => ({
-      ...e,
-      date: new Date(e.date),
-    }));
-    this.setState({ events });
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.timer);
+    if (this.state.loading) {
+      return (
+        <View style={styles.center}>
+          <ActivityIndicator size="large" />;
+        </View>
+      )
+    }
+    return (
+      <View style={styles.center}>
+        <Text>
+          Nothing is here... Yet.
+        </Text>
+      </View>
+    );
   }
 
   renderItem({item}) {
     return (
-      <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewScreen')}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewScreen', {
+        eventId: item.id
+      })}>
         <CreateElement event={item}/>
       </TouchableOpacity>
     )
   }
 
   render(){
+    if (this.state.error) {
+      return <Text>Something went wrong</Text>
+    }
+
     return (
         <View style={styles.container}>
-         <FlatList
-          data={this.state.events}
-          renderItem={this.renderItem}
-          keyExtractor={item => item.id}
-        />
+          <FlatList
+            data={this.props.events}
+            renderItem={this.renderItem}
+            keyExtractor={item => item.id}
+            ListEmptyComponent={this.renderEmptyComponent}
+            contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
+          />
         </View>
     )
   }
@@ -60,15 +74,18 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
+    padding: s(20),
     flex: 1,
+  },
+  containerAdd: {
+    margin: s(30),
     alignItems: 'center',
     justifyContent: 'center',
   },
-  containerAdd: {
-    margin: 30,
-    alignItems: 'center',
+  center: {
+    flex: 1,
     justifyContent: 'center',
+    alignItems: 'center'
   }
 });
 
