@@ -9,59 +9,45 @@ import {
   formatDate,
   getCountdownParts,
 } from './time';
+import { scale as s } from 'react-native-size-matters'
 
 
 
 const styles = StyleSheet.create({
-
   card: {
     backgroundColor: 'orange',
+    width: '100%',
     borderRadius: 10,
-    flex: 10,
-    padding: 10,
-    paddingTop: 10,
-    paddingBottom: 20,
-    margin: 5,
-    marginTop: 20,
-    marginBottom: 5,
-  },
-  cardHeader: {
-    flex: 1,
-    flexDirection: 'row',
-
+    paddingVertical: s(10),
+    paddingHorizontal: s(15),
+    marginBottom: s(13),
+    padding: s(10),
   },
   date: {
     fontWeight: '200',
-    fontSize: 17,
-    color: 'red',
-    width: '20%',
     textAlign: 'center',
-    flexDirection: "row"
+    fontSize: s(13),
+    width: '20%',
   },
   title: {
-    fontSize: 20,
-    fontWeight: '200',
-    marginLeft: 7,
+    fontSize: s(20),
+    fontWeight: 200,
     textAlign: 'left',
     color : 'black',
     fontWeight: 'bold',
-
   },
   counterContainer: {
-    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingLeft: '5%',
-    paddingRight: '5%',
+    marginVertical: s(5),
   },
-
   counterText: {
-    fontSize: 40,
+    fontSize: s(25),
     textAlign: 'center',
     color : 'white'
   },
   counterLabel: {
-    fontSize: 13,
+    fontSize: s(10),
     fontWeight: '100',
     color: 'white',
     textAlign: 'center',
@@ -79,40 +65,33 @@ export default function CreateElement({ event }) {
   } = getCountdownParts(event.date);
 
   return (
-    <View style={styles.card}  >
-      <View style={styles.cardHeader}>
-        <Text style={styles.title}>{event.title}</Text>
-      </View>
+    <View style={styles.card}>
 
-      <View 
-        style={styles.counterContainer}
-         keyExtractor={item => item.title}
-      >
-        <View
-          style={styles.counter}
-        >
+        <Text style={styles.title}>{event.title}</Text>
+
+
+      <View style={styles.counterContainer}>
+        <View style={styles.counter}>
           <Text style={styles.counterText}>{days}</Text>
           <Text style={styles.counterLabel}>DAYS</Text>
         </View>
-        <View
-          style={styles.counter}
-        >
+
+        <View style={styles.counter}>
           <Text style={styles.counterText}>{hours}</Text>
           <Text style={styles.counterLabel}>HOURS</Text>
         </View>
-        <View
-          style={styles.counter}
-        >
+
+        <View style={styles.counter}>
           <Text style={styles.counterText}>{minutes}</Text>
           <Text style={styles.counterLabel}>MINUTES</Text>
         </View>
-        <View
-          style={styles.counter}
-        >
+
+        <View style={styles.counter}>
           <Text style={styles.counterText}>{seconds}</Text>
           <Text style={styles.counterLabel}>SECONDS</Text>
         </View>
-      <Text style={styles.date}>{formatDate(event.date)}</Text>
+
+        <Text style={styles.date}>{formatDate(event.date)}</Text>
       </View>
     </View>
   );

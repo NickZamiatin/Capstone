@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { formatDateTime } from './time';
+import * as Api from './Api';
 
 const styles = StyleSheet.create({
   fieldContainer: {
@@ -48,15 +49,16 @@ class AddScreen extends Component {
   state = {
     title: null,
     date: '',
-    note: null
+    note: null,
+    done: false
   };
 
-  
   handleChangeTitle = (text) => {
     this.setState({
       title: text,
     });
   }
+
   handleChangeNote = (note) => {
     this.setState({
       note: note,
@@ -84,8 +86,22 @@ class AddScreen extends Component {
     });
   }
 
-  handleAddPress = () => {
-    console.log('saving event: ', this.state);
+  handleAddPress = async () => {
+
+    try {
+      await Api.Targets.create({
+        title: this.state.title,
+        notes: this.state.note,
+        done: this.state.done,
+        date: this.state.date,
+      });
+      this.props.getEvents();
+
+    } catch (error) {
+      alert('Something went wrong!');
+      console.warn(error.response);
+    }
+
     this.props.navigation.goBack();
   }
 
@@ -98,7 +114,7 @@ class AddScreen extends Component {
       >
         <View style={styles.fieldContainer}>
           <TextInput
-            style={[styles.text]}//line between 
+            style={[styles.text]}
             placeholder="Pick up a date"
             spellCheck={false}
             value={formatDateTime(this.state.date.toString())}
@@ -125,11 +141,6 @@ class AddScreen extends Component {
             onConfirm={this.handleDatePicked}
             onCancel={this.handleDatePickerHide}
           />
-          {/* <CheckBox
-             title='Click Here'
-             checked={this.state.checked}
-             checkedIcon='dot-circle-o'
-          /> */}
         </View>
 
         <TouchableHighlight
