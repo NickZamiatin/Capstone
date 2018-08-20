@@ -3,7 +3,6 @@ import {View, FlatList, Text, StyleSheet, TouchableOpacity, ActivityIndicator} f
 import CreateElement from './CreateElement';
 import Swipeout from 'react-native-swipeout';
 import { scale as s } from "react-native-size-matters";
-
 import * as Api from './Api';
 
 class Home extends Component {
@@ -18,7 +17,18 @@ class Home extends Component {
   state = {
     error: null,
     loading: true,
+    title: '',
+    date: '',
+    note: '',
+    done: false
   }
+
+  // get event() {
+  //   if (!this.props.navigation.state.params) return null;
+  //   console.log(this.props.navigation.state.params)
+  //   return this.props.events.find(({ id }) => id === this.props.navigation.state.params.eventId);
+
+  // }
 
   renderEmptyComponent() {
     return (
@@ -43,13 +53,56 @@ class Home extends Component {
     );
   }
 
+  doneeNote(item){
+    console.log('Done function here', this.props.events[2].done)
+  }
+  deleteNote = async () => {
+    console.log('Delete function here', this.props.events.find(({ id }) => id === this.props.navigation.state))
+      try {
+        await Api.Targets.delete({
+          title: this.state.title,
+          notes: this.state.note,
+          done: this.state.done,
+          date: this.state.date,
+        });
+        this.props.getEvents();
+  
+      } catch (error) {
+        alert('Something went wrong!');
+        console.warn(error.response);
+      
+  
+      this.props.navigation.goBack();
+    }
+  }
+
   renderItem({item}) {
+    let swipeBtns = [{
+      text: 'Done ',
+      backgroundColor: 'blue',
+      borderRadius: 10,
+      borderWidth: 10,
+      paddingHorizontal: s(15),
+      marginBottom: s(13),
+      padding: s(10),
+      onPress: () => { this.doneeNote(item) }
+    },{
+      text: 'Delete',
+      backgroundColor: 'red',
+      onPress: () => { this.deleteNote(item) }
+   },
+    ];
     return (
+      <Swipeout right={swipeBtns}
+      autoClose='true'
+      style={styles.buttDELETEDONE}
+      backgroundColor= 'transparent'>
       <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewScreen', {
-        eventId: item.id
+        eventId: item.id// hole {}
       })}>
         <CreateElement event={item}/>
       </TouchableOpacity>
+      </Swipeout>
     )
   }
 
@@ -57,6 +110,7 @@ class Home extends Component {
     if (this.state.error) {
       return <Text>Something went wrong</Text>
     }
+    // if (!this.event) return null;
 
     return (
         <View style={styles.container}>
@@ -82,8 +136,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  buttDELETEDONE : {
+    // borderRadius: 10,
+    marginBottom: s(13),
+    borderBottomLeftRadius: s(13),
+    borderBottomRightRadius: s(13),
+    borderTopLeftRadius: s(13),
+    borderTopRightRadius: s(13),
+  },
   center: {
     flex: 1,
+    marginTop : 300,
     justifyContent: 'center',
     alignItems: 'center'
   }

@@ -10,5 +10,5 @@ export const Targets = {
   show: (id) => axios.get(`/${id}`),
   create: (params) => axios.post('/', params),
   update: (id, params) => axios.put(`/${id}`, params),
-  delete: (id, params) => axios.delete(`/${id}`),
+  delete: (id) => axios.delete(`/${id}`),
 }

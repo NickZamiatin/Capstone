@@ -19,7 +19,7 @@ export default class App extends Component {
   }
 
   async getEvents() {
-    console.log('Getting events...')
+    // console.log(event.note)
     const { data } = await Api.Targets.index();
     this.setState({ events: data });
   }
@@ -47,7 +47,7 @@ const TabNavBar = (props) => createMaterialTopTabNavigator(
       screen: (navProps) => React.createElement(Home, { ...props, ...navProps }),
       navigationOptions: {
         title: "Home",
-        tabBarLabel: "Feed"
+        tabBarLabel: "Home"
       }
     },
     ReviewScreen: {
@@ -72,7 +72,7 @@ const TabNavBar = (props) => createMaterialTopTabNavigator(
   {
     tabBarPosition: "bottom",
     fontSize: s(20),
-    swipeEnabled: false,
+    swipeEnabled: false,//swith betwen screen
     tabBarOptions: {
       activeTintColor: "white",
       inactiveTintColor: "orange",

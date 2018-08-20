@@ -17,10 +17,8 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: 'orange',
     width: '100%',
-    borderRadius: 10,
     paddingVertical: s(10),
     paddingHorizontal: s(15),
-    marginBottom: s(13),
     padding: s(10),
   },
   date: {
@@ -44,7 +42,6 @@ const styles = StyleSheet.create({
   counterText: {
     fontSize: s(25),
     textAlign: 'center',
-    color : 'white'
   },
   counterLabel: {
     fontSize: s(10),
@@ -64,13 +61,11 @@ export default function CreateElement({ event }) {
     seconds,
   } = getCountdownParts(event.date);
 
+
   return (
     <View style={styles.card}>
-
-        <Text style={styles.title}>{event.title}</Text>
-
-
-      <View style={styles.counterContainer}>
+      <Text style={styles.title}>{event.title}</Text>
+        <View style={styles.counterContainer}>
         <View style={styles.counter}>
           <Text style={styles.counterText}>{days}</Text>
           <Text style={styles.counterLabel}>DAYS</Text>

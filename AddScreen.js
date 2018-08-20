@@ -9,25 +9,30 @@ import {
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { formatDateTime } from './time';
 import * as Api from './Api';
+import { green } from 'ansi-colors';
 
 const styles = StyleSheet.create({
   fieldContainer: {
-    margin: 30,
-    borderRadius: 10,
+    marginTop: 60,
+    margin: 10,
     backgroundColor: 'white',
+    borderRadius: 10,
+    padding:12,
   },
   text: {
-    height: 85,
+    height: 65,
     margin: 0,
     marginLeft: 7,
     marginRight: 7,
     paddingLeft: 10,
-    fontSize: 20,
+    fontSize: 18,
+    color: 'white',
   },
   borderTop: {
     borderColor: 'orange',
     borderTopWidth: 0.5,
     margin:10,
+    color: 'white',
   },
   button: {
     height: 50,
