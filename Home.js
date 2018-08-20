@@ -4,7 +4,7 @@ import CreateElement from './CreateElement';
 import Swipeout from 'react-native-swipeout';
 import { scale as s } from "react-native-size-matters";
 import * as Api from './Api';
-
+// PastScreen
 class Home extends Component {
 
   constructor() {
@@ -22,13 +22,6 @@ class Home extends Component {
     note: '',
     done: false
   }
-
-  // get event() {
-  //   if (!this.props.navigation.state.params) return null;
-  //   console.log(this.props.navigation.state.params)
-  //   return this.props.events.find(({ id }) => id === this.props.navigation.state.params.eventId);
-
-  // }
 
   renderEmptyComponent() {
     return (
@@ -90,7 +83,6 @@ class Home extends Component {
     ];
     return (
       <Swipeout right={swipeBtns}
-      autoClose='true'
       style={styles.buttDELETEDONE}
       backgroundColor= 'transparent'>
       <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewScreen', {
@@ -113,7 +105,7 @@ class Home extends Component {
           <FlatList
             data={this.props.events}
             renderItem={this.renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
             ListEmptyComponent={this.renderEmptyComponent}
             contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
           />

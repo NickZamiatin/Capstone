@@ -1,97 +1,148 @@
 import React, {Component} from 'react';
-import {Text , View, TouchableOpacity,StyleSheet,ScrollView, FlatList} from 'react-native';
-import Swipeout from 'react-native-swipeout';
+import {View, FlatList, Text, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
 import CreateElement from './CreateElement';
-
-
+import Swipeout from 'react-native-swipeout';
+import { scale as s } from "react-native-size-matters";
+import * as Api from './Api';
+// PastScreen
 class PastScreen extends Component {
 
-  // constructor() {
-  //   super()
-  //   this.timer = 0;
-  //   this.renderItem = this.renderItem.bind(this)
-  // }
-  // state = {
-  //   event : []
-  // }
-
-
-  DeletePast = () => {
+  constructor() {
+    super()
+    this.timer = 0;
+    this.renderItem = this.renderItem.bind(this);
+    this.renderEmptyComponent = this.renderEmptyComponent.bind(this);
   }
 
+  state = {
+    error: null,
+    loading: true,
+    title: '',
+    date: '',
+    note: '',
+    done: false
+  }
 
-  // renderItem({item}) {
-  //   return (
-  //     <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewScreen')}>
-  //       <CreateElement event={item}/>
-  //     </TouchableOpacity>
-  //   )
-  // }
-  
-  render(){
-    const swipeoutSet = {
-      autoClose: true,
-      backgroundColor :"transparent",
-      onClose : (secId,rowId,direction)=>{
+  renderEmptyComponent() {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" />;
+      </View>
+    )
 
-      },
-      onOpen : (secId,rowId,direction)=>{
-
-      },
-      rigth : [
-        {
-          test : 'Delete' , type: 'delete'
-        }
-      ]
+    if (this.state.loading) {
+      return (
+        <View style={styles.center}>
+          <ActivityIndicator size="large" />;
+        </View>
+      )
     }
     return (
-      <ScrollView>
-      <View style={styles.history}>
-
-        <TouchableOpacity onPress={this.DeletePast} >
-        <View style={styles.done}>
-        {/* <FlatList
-          data={this.state.events}
-          renderItem={this.renderItem}
-          keyExtractor={item => item.id}
-        /> */}
-          
-          </View>
-        </TouchableOpacity>
-      <Swipeout {...swipeoutSet}>
-          <View style={[styles.fail]}>
-          <Text> PastScreen Not Finish  </Text>
-          </View>
-      </Swipeout>
+      <View style={styles.center}>
+        <Text>
+          Nothing is here... Yet.
+        </Text>
       </View>
-      </ScrollView>
+    );
+  }
+
+  deleteNote = async (id) => {
+      try {
+        await Api.Targets.delete(id);
+        this.props.getEvents();
+  
+      } catch (error) {
+        alert('Something went wrong!');  
+      this.props.navigation.goBack();
+    }
+  }
+
+  renderItem({item}) {
+    let swipeBtns = [{
+      text: 'Delete',
+      backgroundColor: 'red',
+      onPress: () => { this.deleteNote(item.id) }
+   },
+    ];
+    return (
+      <Swipeout right={swipeBtns}
+      style={styles.buttDELETEDONE}
+      backgroundColor= 'transparent'>
+      {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Home', {
+        eventId: item.id
+      })}>
+      </TouchableOpacity> */}
+        <CreateElement event={item}/>
+      </Swipeout>
+    )
+  }
+
+  render(){
+    if (this.state.error) {
+      return <Text>Something went wrong</Text>
+    }
+
+    return (
+        <View style={styles.container}>
+        <Text  style={styles.textTop}> Done </Text>
+          <FlatList
+            data={this.props.eventDone}
+            style={styles.eventDone}
+            renderItem={this.renderItem}
+            keyExtractor={item => item.id.toString()}
+            ListEmptyComponent={this.renderEmptyComponent}
+            contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
+          />
+          <Text  style={styles.textTop}> Dont pass </Text>
+          <FlatList
+            data={this.props.eventExpiry}
+            style={styles.eventExpiry}
+            renderItem={this.renderItem}
+            keyExtractor={item => item.id.toString()}
+            ListEmptyComponent={this.renderEmptyComponent}
+            contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
+          />
+        </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  history :{
+  container: {
+    padding: s(20),
+    flex: 1,
   },
-  done :{
-    backgroundColor: 'green',
-    margin: 20,
-    borderRadius: 10,
-    padding: 10,
+  containerAdd: {
+    margin: s(30),
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  fail: {
-    backgroundColor: 'red',
-    margin: 20,
-    borderRadius: 10,
-    padding: 10,
-  },
-  // borderTop: {
-  //   backgroundColor: 'orange',
-  //   borderTopWidth: 1,
-  //   margin:2,
-  //   flex: 1,
-  //   borderRadius: 10,
-  // },
-})
+  textTop: {
+    color: 'white',
+    margin:10,
+    fontWeight: 'bold' ,
+    // textAlign: 'center',
 
+  },
+  buttDELETEDONE : {
+    marginBottom: s(13),
+    borderBottomLeftRadius: s(13),
+    borderBottomRightRadius: s(13),
+    borderTopLeftRadius: s(13),
+    borderTopRightRadius: s(13),
+  },
+  center: {
+    flex: 1,
+    marginTop : 300,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  eventExpiry: {
+    // backgroundColor: "red"
+  },
+  eventDone:{
+    // backgroundColor: "blue"
+  }
+});
 
 export default PastScreen

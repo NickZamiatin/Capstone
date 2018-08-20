@@ -14,17 +14,36 @@ export default class App extends Component {
     super();
     this.state = {
       events: [],
+      eventDone : [],
+      eventExpiry : [],
+
+
     }
     this.getEvents = this.getEvents.bind(this);
   }
 
+  
+  
   async getEvents() {
-    // console.log(event.note)
     const { data } = await Api.Targets.index();
-    //set events by id on state 
-    // updastenig redux 
-    // 2 arr for past and done 
-    this.setState({ events: data });
+    const events = [];
+    const eventDone = [];
+    const eventExpiry = [];
+    const now = Date.now()
+    data.forEach(event => {
+      const eventDate = +new Date(event.date)
+      if (now < eventDate && !event.done ){
+        events.push(event)
+      }else if (event.done){
+        eventDone.push(event)
+      }else {
+        eventExpiry.push(event)
+      }
+    })
+    console.log('eventDone' ,eventDone)
+    console.log('events' ,events)
+    console.log('eventExpiry' ,eventExpiry)
+    this.setState({ events, eventDone, eventExpiry });
     
   }
 
@@ -38,8 +57,9 @@ export default class App extends Component {
         <StatusBar barStyle="light-content" />
         {React.createElement(TabNavBar({
           getEvents: this.getEvents,
-          events: this.state.events, // pass down events by id 
-          // pass done and pass 
+          events: this.state.events,
+          eventDone: this.state.eventDone,
+          eventExpiry: this.state.eventExpiry,
         }))}
       </SafeAreaView>
     );
@@ -80,7 +100,7 @@ const TabNavBar = (props) => createMaterialTopTabNavigator(
     swipeEnabled: false,//swith betwen screen
     tabBarOptions: {
       activeTintColor: "white",
-      inactiveTintColor: "orange",
+      inactiveTintColor: 'rgba(255, 149, 0, 1)',
       style: {
         backgroundColor: "black"
       },

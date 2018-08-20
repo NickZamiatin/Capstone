@@ -15,7 +15,11 @@ import { scale as s } from 'react-native-size-matters'
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: 'orange',
+    // backgroundColor: 'rgba(255, 0, 0, 1)',//red
+    backgroundColor: 'rgba(255, 149, 0, 1)',//orange
+    // backgroundColor: 'rgba(0, 122, 255, 1)',//blue
+    // backgroundColor: 'rgba(88, 86, 214, 2)',//purpul
+    // backgroundColor: 'rgba(255, 204, 0, 2)',//yellow
     width: '100%',
     paddingVertical: s(10),
     paddingHorizontal: s(15),
@@ -50,6 +54,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 0,
   },
+  eventExpiry: {
+    backgroundColor: "red"
+  },
+  eventDone:{
+    backgroundColor: "blue"
+  }
 });
 
 
@@ -95,6 +105,6 @@ export default function CreateElement({ event }) {
 CreateElement.propTypes = {
   event: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    date: PropTypes.instanceOf(Date)
+    date: PropTypes.string.isRequired
   }),
 };

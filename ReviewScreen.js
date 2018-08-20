@@ -6,58 +6,61 @@ import { scale as s } from 'react-native-size-matters'
 
 const styles = StyleSheet.create({
   reviewScreen : {
-    margin: s(20),
+    flex: 1,
+    margin: s(5),
+    padding: s(10),
     alignItems: 'center',
-    justifyContent: 'center',
   },
   buttonUpdate: {
-    backgroundColor: 'orange',
-    height: 50,
+    height: 60,
+    // fontWeight: '300',
     borderColor: 'white',
-    margin: 30,
+    // margin: 30,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
     paddingVertical: s(10),
     paddingHorizontal: s(15),
-    marginBottom: s(13),
+    marginBottom: s(3),
     padding: s(10),
+    // fontSize: s(70),
   },
-  buttonDelete: {
-    backgroundColor: 'orange',
-    height: 50,
-    borderColor: 'white',
-    margin: 30,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10,
-    paddingVertical: s(10),
-    paddingHorizontal: s(15),
-    marginBottom: s(13),
-    padding: s(10),
-  },
+
   card: {
-    backgroundColor: 'orange',
+    backgroundColor: 'rgba(255, 149, 0, 1)',
     width: '100%',
-    height: 170,
+    height: 250,
     borderRadius: 10,
     paddingVertical: s(10),
     paddingHorizontal: s(15),
-    marginBottom: s(13),
-    padding: s(10),
+    // padding: s(10),
   },
   title: {
-    fontSize: s(20),
-    fontWeight: 200,
-    // textAlign: 'left',
+    marginBottom: s(13),
+    flexDirection: 'row',
+    fontSize: s(26),
+    fontWeight: 180,
+    textAlign: 'center',
     color : 'black',
     fontWeight: 'bold',
   },
   date: {
-    fontWeight: '200',
+    flexDirection: 'row',
+    marginBottom: s(13),
+    fontSize: s(23),
+    fontWeight: 180,
     textAlign: 'center',
-    fontSize: s(13),
-    width: '20%',
+    color : 'red',
+    fontWeight: 'bold',
+  },
+  note: {
+    // marginBottom: s(13),
+    flexDirection: 'row',
+    fontSize: s(20),
+    fontWeight: 180,
+    textAlign: 'center',
+    color : 'black',
+    fontWeight: 'bold',
   },
 })
 
@@ -68,7 +71,6 @@ class ReviewScreen extends Component {
     if (!this.props.navigation.state.params) return null;
     // console.log(this.props.navigation.state.params)
     const event = this.props.events.find(({ id }) => id === this.props.navigation.state.params.eventId);
-    // console.log("event", event)
     return event
   }
 
@@ -81,27 +83,19 @@ class ReviewScreen extends Component {
 
     return (
       <View style={styles.reviewScreen} >
-      <View style={styles.card}>
-      <View style={{flex: 1, justifyContent: 'center' }}>
-        <Text style={styles.title} >{this.event.title}</Text>
-        <Text >{formatDate(this.event.date)}</Text>
-        <Text style={styles.date} >{this.event.notes}</Text>
-      </View>
-      <View style={{flex: 1,  flexDirection: 'row',  justifyContent: 'center' }}>
-        <TouchableOpacity onPress={this.pressUpdate} style={styles.buttonUpdate}>
-          <Text style={{ color: 'blue' }}>
-            Update
-          </Text>
-        </TouchableOpacity>
-      </View>
-    
-
-
-        {/* <TouchableOpacity onPress={this.pressDelete} style={styles.buttonDelete} >
-          <Text style={{ color: '#9400d3' }}>
-            Delete
-          </Text>
-        </TouchableOpacity> */}
+        <View style={styles.card}>
+          <View style={{flex: 1 }}>
+            <Text style={styles.title} >{this.event.title}</Text>
+            <Text  style={styles.date}>{formatDate(this.event.date)}</Text>
+            <Text style={styles.note} >{this.event.notes}</Text>
+          </View>
+          <View >
+            <TouchableOpacity onPress={this.pressUpdate} style={styles.buttonUpdate}>
+             <Text >
+               Update
+             </Text>
+           </TouchableOpacity>
+           </View>
         </View>
       </View>
     )

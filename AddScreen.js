@@ -9,7 +9,7 @@ import {
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { formatDateTime } from './time';
 import * as Api from './Api';
-import { green } from 'ansi-colors';
+
 
 const styles = StyleSheet.create({
   fieldContainer: {
@@ -26,27 +26,27 @@ const styles = StyleSheet.create({
     marginRight: 7,
     paddingLeft: 10,
     fontSize: 18,
-    color: 'white',
+    color: 'black',
   },
   borderTop: {
     borderColor: 'orange',
     borderTopWidth: 0.5,
     margin:10,
-    color: 'white',
   },
   button: {
     height: 50,
-    backgroundColor: 'orange',
+    backgroundColor: 'rgba(255, 149, 0, 1)',
     borderColor: 'orange',
     alignSelf: 'stretch',
-    margin: 30,
+    margin: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
+
   },
   buttonText: {
-    color: 'white',
-    fontSize: 18,
+    color: 'black',
+    fontSize: 22,
   },
 });
 
@@ -153,7 +153,7 @@ class AddScreen extends Component {
           style={styles.button}
           checkedColor='red'
         >
-          <Text style={styles.buttonText}>Add</Text>
+          <Text style={styles.buttonText}>Save</Text>
         </TouchableHighlight>
       </View>
     );
