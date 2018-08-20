@@ -54,17 +54,13 @@ class Home extends Component {
   }
 
   doneeNote(item){
-    console.log('Done function here', this.props.events[2].done)
+    // console.log('Done function here', this.props.events[2].done)
   }
-  deleteNote = async () => {
-    console.log('Delete function here', this.props.events.find(({ id }) => id === this.props.navigation.state))
+  deleteNote = async (id) => {
+    console.log('Delete function here', id)
+    // this.props.events.find(({ id }) => id === this.props.navigation.state)
       try {
-        await Api.Targets.delete({
-          title: this.state.title,
-          notes: this.state.note,
-          done: this.state.done,
-          date: this.state.date,
-        });
+        await Api.Targets.delete(id);
         this.props.getEvents();
   
       } catch (error) {
@@ -89,7 +85,7 @@ class Home extends Component {
     },{
       text: 'Delete',
       backgroundColor: 'red',
-      onPress: () => { this.deleteNote(item) }
+      onPress: () => { this.deleteNote(item.id) }
    },
     ];
     return (

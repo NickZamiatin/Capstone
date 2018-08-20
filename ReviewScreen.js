@@ -66,9 +66,10 @@ class ReviewScreen extends Component {
 
   get event() {
     if (!this.props.navigation.state.params) return null;
-    console.log(this.props.navigation.state.params)
-    return this.props.events.find(({ id }) => id === this.props.navigation.state.params.eventId);
-
+    // console.log(this.props.navigation.state.params)
+    const event = this.props.events.find(({ id }) => id === this.props.navigation.state.params.eventId);
+    // console.log("event", event)
+    return event
   }
 
   pressUpdate = () => {
@@ -84,7 +85,7 @@ class ReviewScreen extends Component {
       <View style={{flex: 1, justifyContent: 'center' }}>
         <Text style={styles.title} >{this.event.title}</Text>
         <Text >{formatDate(this.event.date)}</Text>
-        <Text style={styles.date} >{this.event.note}</Text>
+        <Text style={styles.date} >{this.event.notes}</Text>
       </View>
       <View style={{flex: 1,  flexDirection: 'row',  justifyContent: 'center' }}>
         <TouchableOpacity onPress={this.pressUpdate} style={styles.buttonUpdate}>

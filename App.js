@@ -21,7 +21,11 @@ export default class App extends Component {
   async getEvents() {
     // console.log(event.note)
     const { data } = await Api.Targets.index();
+    //set events by id on state 
+    // updastenig redux 
+    // 2 arr for past and done 
     this.setState({ events: data });
+    
   }
 
   async componentWillMount() {
@@ -34,7 +38,8 @@ export default class App extends Component {
         <StatusBar barStyle="light-content" />
         {React.createElement(TabNavBar({
           getEvents: this.getEvents,
-          events: this.state.events,
+          events: this.state.events, // pass down events by id 
+          // pass done and pass 
         }))}
       </SafeAreaView>
     );
