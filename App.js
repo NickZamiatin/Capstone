@@ -40,9 +40,9 @@ export default class App extends Component {
         eventExpiry.push(event)
       }
     })
-    console.log('eventDone' ,eventDone)
-    console.log('events' ,events)
-    console.log('eventExpiry' ,eventExpiry)
+    // console.log('eventDone' ,eventDone)
+    // console.log('events' ,events)
+    // console.log('eventExpiry' ,eventExpiry)
     this.setState({ events, eventDone, eventExpiry });
     
   }

@@ -11,20 +11,20 @@ import {
 } from './time';
 import { scale as s } from 'react-native-size-matters'
 
-
+const card = {
+  // backgroundColor: 'rgba(255, 0, 0, 1)',//red   from apple 
+  backgroundColor: 'rgba(255, 149, 0, 1)',//orange  from apple 
+  // backgroundColor: 'rgba(0, 122, 255, 1)',//blue  from apple 
+  // backgroundColor: 'rgba(88, 86, 214, 2)',//purpul  from apple 
+  // backgroundColor: 'rgba(255, 204, 0, 2)',//yellow  from apple 
+  width: '100%',
+  paddingVertical: s(10),
+  paddingHorizontal: s(15),
+  padding: s(10),
+};
 
 const styles = StyleSheet.create({
-  card: {
-    // backgroundColor: 'rgba(255, 0, 0, 1)',//red
-    backgroundColor: 'rgba(255, 149, 0, 1)',//orange
-    // backgroundColor: 'rgba(0, 122, 255, 1)',//blue
-    // backgroundColor: 'rgba(88, 86, 214, 2)',//purpul
-    // backgroundColor: 'rgba(255, 204, 0, 2)',//yellow
-    width: '100%',
-    paddingVertical: s(10),
-    paddingHorizontal: s(15),
-    padding: s(10),
-  },
+  card,
   date: {
     fontWeight: '200',
     textAlign: 'center',
@@ -63,17 +63,25 @@ const styles = StyleSheet.create({
 });
 
 
-export default function CreateElement({ event }) {
+export default function CreateElement({ event, backgroundColor }) {
   const {
     days,
     hours,
     minutes,
     seconds,
   } = getCountdownParts(event.date);
+  backgroundColor = backgroundColor || 'rgba(255, 149, 0, 1)';
+  const cardStyle = StyleSheet.create({
+    card: {
+      ...card,
+      backgroundColor,
+      
+    },
 
+  })
 
   return (
-    <View style={styles.card}>
+    <View style={cardStyle.card}>
       <Text style={styles.title}>{event.title}</Text>
         <View style={styles.counterContainer}>
         <View style={styles.counter}>
@@ -102,9 +110,10 @@ export default function CreateElement({ event }) {
   );
 }
 
-CreateElement.propTypes = {
-  event: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired
-  }),
-};
+// CreateElement.propTypes = {
+//   event: PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     date: PropTypes.string.isRequired,
+//   }),
+//   cardStyle: PropTypes.object
+// };

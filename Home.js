@@ -4,7 +4,6 @@ import CreateElement from './CreateElement';
 import Swipeout from 'react-native-swipeout';
 import { scale as s } from "react-native-size-matters";
 import * as Api from './Api';
-// PastScreen
 class Home extends Component {
 
   constructor() {
@@ -46,19 +45,26 @@ class Home extends Component {
     );
   }
 
-  doneeNote(item){
+  doneeNote = async (event) =>{
     // console.log('Done function here', this.props.events[2].done)
+    try {
+      await Api.Targets.update(event.id,{
+        ...event,
+        done: true,
+      });
+      this.props.getEvents();
+
+    } catch (error) {
+      alert('Something went wrong!');
+    }
   }
   deleteNote = async (id) => {
-    console.log('Delete function here', id)
-    // this.props.events.find(({ id }) => id === this.props.navigation.state)
       try {
         await Api.Targets.delete(id);
         this.props.getEvents();
   
       } catch (error) {
         alert('Something went wrong!');
-        console.warn(error.response);
       
   
       this.props.navigation.goBack();
@@ -86,7 +92,7 @@ class Home extends Component {
       style={styles.buttDELETEDONE}
       backgroundColor= 'transparent'>
       <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewScreen', {
-        eventId: item.id// hole {}
+        eventId: item.id
       })}>
         <CreateElement event={item}/>
       </TouchableOpacity>

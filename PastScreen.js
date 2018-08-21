@@ -57,7 +57,7 @@ class PastScreen extends Component {
     }
   }
 
-  renderItem({item}) {
+  renderItem({item},color) {
     let swipeBtns = [{
       text: 'Delete',
       backgroundColor: 'red',
@@ -72,7 +72,7 @@ class PastScreen extends Component {
         eventId: item.id
       })}>
       </TouchableOpacity> */}
-        <CreateElement event={item}/>
+        <CreateElement event={item}  backgroundColor={color}/>
       </Swipeout>
     )
   }
@@ -88,7 +88,7 @@ class PastScreen extends Component {
           <FlatList
             data={this.props.eventDone}
             style={styles.eventDone}
-            renderItem={this.renderItem}
+            renderItem={(item) => this.renderItem(item, "green")}
             keyExtractor={item => item.id.toString()}
             ListEmptyComponent={this.renderEmptyComponent}
             contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
@@ -97,7 +97,7 @@ class PastScreen extends Component {
           <FlatList
             data={this.props.eventExpiry}
             style={styles.eventExpiry}
-            renderItem={this.renderItem}
+            renderItem={(item) => this.renderItem(item, 'rgba(255, 0, 0, 1)')}
             keyExtractor={item => item.id.toString()}
             ListEmptyComponent={this.renderEmptyComponent}
             contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
