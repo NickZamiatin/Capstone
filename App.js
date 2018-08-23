@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SafeAreaView, StatusBar } from "react-native";
+import { SafeAreaView, StatusBar, AsyncStorage } from "react-native";
 import Home from "./Home";
 import AddScreen from "./AddScreen";
 import ReviewScreen from "./ReviewScreen";
@@ -12,14 +12,15 @@ export default class App extends Component {
 
   constructor() {
     super();
+    // AsyncStorage.setItem('myEvents', JSON.stringify(myEvents))
+
     this.state = {
       events: [],
       eventDone : [],
       eventExpiry : [],
-
-
     }
     this.getEvents = this.getEvents.bind(this);
+
   }
 
   
@@ -40,14 +41,12 @@ export default class App extends Component {
         eventExpiry.push(event)
       }
     })
-    // console.log('eventDone' ,eventDone)
-    // console.log('events' ,events)
-    // console.log('eventExpiry' ,eventExpiry)
     this.setState({ events, eventDone, eventExpiry });
     
   }
-
+  
   async componentWillMount() {
+
     this.getEvents();
   }
 
