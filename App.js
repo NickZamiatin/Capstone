@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { SafeAreaView, StatusBar, AsyncStorage } from "react-native";
-import Home from "./Home";
-import AddScreen from "./AddScreen";
-import ReviewScreen from "./ReviewScreen";
-import PastScreen from "./PastScreen";
+import { SafeAreaView, StatusBar} from "react-native";
+import Home from "./components/HomeScreen";
+import AddScreen from "./components/AddScreen";
+import ReviewScreen from "./components/ReviewScreen";
+import PastScreen from "./components/PastScreen";
 import { createMaterialTopTabNavigator } from "react-navigation";
 import { scale as s } from "react-native-size-matters";
 import * as Api from './Api';
+import LoginScreen from "./components/LoginScreen";
 
 export default class App extends Component {
 
@@ -54,6 +55,7 @@ export default class App extends Component {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "black", shadowColor: "red" }}>
         <StatusBar barStyle="light-content" />
+        {/* <LoginScreen /> */}
         {React.createElement(TabNavBar({
           getEvents: this.getEvents,
           events: this.state.events,

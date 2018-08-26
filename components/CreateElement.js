@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import {
   formatDate,
   getCountdownParts,
-} from './time';
+} from '../time';
 import { scale as s } from 'react-native-size-matters'
 
 const card = {

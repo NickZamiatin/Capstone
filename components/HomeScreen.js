@@ -3,9 +3,8 @@ import {View, FlatList, Text, StyleSheet, TouchableOpacity, ActivityIndicator} f
 import CreateElement from './CreateElement';
 import Swipeout from 'react-native-swipeout';
 import { scale as s } from "react-native-size-matters";
-import * as Api from './Api';
-// PastScreen
-class PastScreen extends Component {
+import * as Api from '../Api';
+class HomeScreen extends Component {
 
   constructor() {
     super()
@@ -46,19 +45,43 @@ class PastScreen extends Component {
     );
   }
 
+  doneeNote = async (event) =>{
+    // console.log('Done function here', this.props.events[2].done)
+    try {
+      await Api.Targets.update(event.id,{
+        ...event,
+        done: true,
+      });
+      this.props.getEvents();
+
+    } catch (error) {
+      alert('Something went wrong!');
+    }
+  }
   deleteNote = async (id) => {
       try {
         await Api.Targets.delete(id);
         this.props.getEvents();
   
       } catch (error) {
-        alert('Something went wrong!');  
+        alert('Something went wrong!');
+      
+  
       this.props.navigation.goBack();
     }
   }
 
-  renderItem({item},color) {
+  renderItem({item}) {
     let swipeBtns = [{
+      text: 'Done ',
+      backgroundColor: 'blue',
+      borderRadius: 10,
+      borderWidth: 10,
+      paddingHorizontal: s(15),
+      marginBottom: s(13),
+      padding: s(10),
+      onPress: () => { this.doneeNote(item) }
+    },{
       text: 'Delete',
       backgroundColor: 'red',
       onPress: () => { this.deleteNote(item.id) }
@@ -68,11 +91,11 @@ class PastScreen extends Component {
       <Swipeout right={swipeBtns}
       style={styles.buttDELETEDONE}
       backgroundColor= 'transparent'>
-      {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Home', {
+      <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewScreen', {
         eventId: item.id
       })}>
-      </TouchableOpacity> */}
-        <CreateElement event={item}  backgroundColor={color}/>
+        <CreateElement event={item}/>
+      </TouchableOpacity>
       </Swipeout>
     )
   }
@@ -81,23 +104,13 @@ class PastScreen extends Component {
     if (this.state.error) {
       return <Text>Something went wrong</Text>
     }
+    // if (!this.event) return null;
 
     return (
         <View style={styles.container}>
-        <Text  style={styles.textTop}> Done </Text>
           <FlatList
-            data={this.props.eventDone}
-            style={styles.eventDone}
-            renderItem={(item) => this.renderItem(item, "green")}
-            keyExtractor={item => item.id.toString()}
-            ListEmptyComponent={this.renderEmptyComponent}
-            contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
-          />
-          <Text  style={styles.textTop}> Dont pass </Text>
-          <FlatList
-            data={this.props.eventExpiry}
-            style={styles.eventExpiry}
-            renderItem={(item) => this.renderItem(item, 'rgba(255, 0, 0, 1)')}
+            data={this.props.events}
+            renderItem={this.renderItem}
             keyExtractor={item => item.id.toString()}
             ListEmptyComponent={this.renderEmptyComponent}
             contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
@@ -117,14 +130,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  textTop: {
-    color: 'white',
-    margin:10,
-    fontWeight: 'bold' ,
-    // textAlign: 'center',
-
-  },
   buttDELETEDONE : {
+    // borderRadius: 10,
     marginBottom: s(13),
     borderBottomLeftRadius: s(13),
     borderBottomRightRadius: s(13),
@@ -136,13 +143,7 @@ const styles = StyleSheet.create({
     marginTop : 300,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  eventExpiry: {
-    // backgroundColor: "red"
-  },
-  eventDone:{
-    // backgroundColor: "blue"
   }
 });
 
-export default PastScreen
+export default HomeScreen

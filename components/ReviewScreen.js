@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Text , View, TouchableOpacity ,StyleSheet, TextInput, TouchableHighlight} from 'react-native';
-import {formatDate, formatDateTime} from './time';
+import {formatDate, formatDateTime} from '../time';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 import { scale as s } from 'react-native-size-matters'
-import * as Api from './Api';
+import * as Api from '../Api';
 
 
 const styles = StyleSheet.create({
