@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { SafeAreaView, StatusBar} from "react-native";
+import { SafeAreaView, StatusBar, AsyncStorage} from "react-native";
 import Home from "./components/HomeScreen";
 import AddScreen from "./components/AddScreen";
 import ReviewScreen from "./components/ReviewScreen";
@@ -7,7 +7,8 @@ import PastScreen from "./components/PastScreen";
 import { createMaterialTopTabNavigator } from "react-navigation";
 import { scale as s } from "react-native-size-matters";
 import * as Api from './Api';
-import LoginScreen from "./components/LoginScreen";
+import Axios from 'axios';
+import EntryScreen from "./components/EntryScreen";
 
 export default class App extends Component {
 
@@ -19,12 +20,21 @@ export default class App extends Component {
       events: [],
       eventDone : [],
       eventExpiry : [],
+      isLoggedIn: false,
     }
     this.getEvents = this.getEvents.bind(this);
 
   }
 
-  
+  setLogin = (isLoggedIn) => {
+    this.setState({
+      isLoggedIn
+    })
+
+    if (isLoggedIn){
+      this.getEvents();
+    }
+  }
   
   async getEvents() {
     const { data } = await Api.Targets.index();
@@ -46,22 +56,30 @@ export default class App extends Component {
     
   }
   
-  async componentWillMount() {
+  async componentDidMount() {
+    const token = await AsyncStorage.getItem('token')
+    Axios.defaults.headers.common['Authorization'] = token;
 
-    this.getEvents();
+    if (token){
+      this.setState({
+        isLoggedIn: false// swith for log 
+      })
+      this.getEvents();
+    }
   }
 
   render() {
     return (
       <SafeAreaView style={{ flex: 1, backgroundColor: "black", shadowColor: "red" }}>
         <StatusBar barStyle="light-content" />
-        {/* <LoginScreen /> */}
-        {React.createElement(TabNavBar({
+       { !this.state.isLoggedIn ? <EntryScreen setLogin={this.setLogin} /> :
+         React.createElement(TabNavBar({
           getEvents: this.getEvents,
           events: this.state.events,
           eventDone: this.state.eventDone,
           eventExpiry: this.state.eventExpiry,
-        }))}
+        }))
+       }
       </SafeAreaView>
     );
   }

@@ -105,7 +105,7 @@ class HomeScreen extends Component {
       return <Text>Something went wrong</Text>
     }
     // if (!this.event) return null;
-
+    // const { navigate } = this.props.navigation;
     return (
         <View style={styles.container}>
           <FlatList

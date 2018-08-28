@@ -3,6 +3,8 @@ import { AsyncStorage } from "react-native"
 import { relativeTimeRounding } from 'moment';
 
 const API_URL = 'https://expresstarget.herokuapp.com/api/v1/targets/';
+// https://git.heroku.com/expresstarget.git/
+const ACCESS_TOKEN = 'cj is it jknjknj hknkjbmklnjln kj knkjbln'
 const axios = Axios.create({
   baseURL: API_URL,
 })
@@ -12,6 +14,7 @@ export const Targets = {
     try {
       const result  = await axios.get('/')
       await AsyncStorage.setItem('targets', JSON.stringify(result))
+      
       return result
     }catch (error){
       const targets = await AsyncStorage.getItem('targets')

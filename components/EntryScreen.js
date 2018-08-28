@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
+import LoginScreen from "./LoginScreen";
+// import SingnupScreen from "./SingnupScreen";
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
 import Auth from '../auth'
 const styles = StyleSheet.create({
@@ -24,17 +26,21 @@ container: {
     marginTop: 100,
     fontSize: 28,
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
   },
   button: {
     height: 50,
     backgroundColor: 'rgba(255, 149, 0, 1)',
     borderColor: 'orange',
     alignSelf: 'stretch',
-    margin: 40,
+    margin: 3,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
+  },
+  buttons: {
+    
+    marginTop: 320,
   }
 })
 
@@ -42,22 +48,8 @@ container: {
 // https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=afbe9f5cf4e0194b07648afd2ab3e887&auto=format&fit=crop&w=1650&q=80
 // https://images.unsplash.com/photo-1524678714210-9917a6c619c2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0f077eae6a256063c3d662eec3f54eb4&auto=format&fit=crop&w=1649&q=80  need to chage color to orange and black
 
-class LoginScreen extends Component {
-  state = {
-    email: '',
-    password: null
-  };
+class EntryScreen extends Component {
 
-  handleChangeLogin = (email) => {
-    this.setState({
-      email: email,
-    })
-  }
-  handleChangePassword = (password) => {
-    this.setState({
-      password: password,
-    })
-  }
 
   handleLoginPress = async () => {
     try {
@@ -82,25 +74,7 @@ class LoginScreen extends Component {
       <ImageBackground source={{uri: 'https://snag.gy/ZsVG1k.jpg'}} style={{width: '100%', height: '100%'}}>
       <Text  style={[styles.title]}>FOCUS TIME </Text>
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
-      <View style={[styles.main, styles.container]} behavior="padding" enabled>
-         <TextInput
-            style={[styles.text]}
-            onChangeText={this.handleChangeLogin}
-            placeholder="Login"
-            returnKeyType="done"
-            spellCheck={false}
-            value={this.state.email}
-          />
-          <TextInput
-            style={[styles.text]}
-            onChangeText={this.handleChangePassword}
-            placeholder="Password"
-            returnKeyType="done"
-            secureTextEntry={false}
-            spellCheck={false}
-            value={this.state.password}
-          />
-       </View>
+          <View style={styles.buttons}>
             <TouchableHighlight
               onPress={this.handleLoginPress}
               style={styles.button}
@@ -108,6 +82,16 @@ class LoginScreen extends Component {
               >
               <Text style={styles.buttonText}>Login</Text>
             </TouchableHighlight>
+            {/* <LoginScreen /> */}
+            {/* <SingnupScreen /> */}
+            <TouchableHighlight
+              onPress={this.handleLoginPress}
+              style={styles.button}
+              checkedColor='red'
+              >
+              <Text style={styles.buttonText}>Singup</Text>
+            </TouchableHighlight>
+            </View>
           </KeyboardAvoidingView>
         </ImageBackground>
       </KeyboardAvoidingView>
@@ -115,4 +99,4 @@ class LoginScreen extends Component {
   }
 }
 
-export default LoginScreen
+export default EntryScreen
