@@ -62,7 +62,7 @@ export default class App extends Component {
 
     if (token){
       this.setState({
-        isLoggedIn: false// swith for log 
+        isLoggedIn: true // swith for log 
       })
       this.getEvents();
     }

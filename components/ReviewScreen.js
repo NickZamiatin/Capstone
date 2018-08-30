@@ -118,7 +118,7 @@ class ReviewScreen extends Component {
     if (!this.props.navigation.state.params) return null;
     // console.log(this.props.navigation.state.params)
     const event = this.props.events.find(({ id }) => id === this.props.navigation.state.params.eventId);
-    console.log("EVENT ",event)
+    // console.log("EVENT ",event)
     return event
 
   }

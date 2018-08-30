@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Axios from 'axios';
 import LoginScreen from "./LoginScreen";
-// import SingnupScreen from "./SingnupScreen";
+import SingnupScreen from "./SingnupScreen";
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
 import Auth from '../auth'
 const styles = StyleSheet.create({
@@ -50,23 +50,25 @@ container: {
 
 class EntryScreen extends Component {
 
-
-  handleLoginPress = async () => {
-    try {
-    const result = await Auth.login({
-        email: this.state.email,
-        password: this.state.password,
-      });
-      await AsyncStorage.setItem('token', result.data.token)
-      Axios.defaults.headers.common['Authorization'] = result.data.token;
-      this.props.setLogin(true)
-    } catch (error) {
-      alert('Incorect Email or password!');
-      console.warn(error.message);
-      this.props.setLogin(false)
-    }
-
+  state = {
+    login: false,
+    singup: false
   }
+
+
+
+  handleLoginPress = () => {
+    this.setState({
+      login: true
+    })
+  }
+  handleSingupPress = () => {
+    this.setState({
+      singup: true
+    })
+  }
+
+
 
   render(){
     return (
@@ -74,24 +76,24 @@ class EntryScreen extends Component {
       <ImageBackground source={{uri: 'https://snag.gy/ZsVG1k.jpg'}} style={{width: '100%', height: '100%'}}>
       <Text  style={[styles.title]}>FOCUS TIME </Text>
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
-          <View style={styles.buttons}>
-            <TouchableHighlight
+      
+    {  (!this.state.login && !this.state.singup) ? <View style={styles.buttons}>
+              <TouchableHighlight
               onPress={this.handleLoginPress}
               style={styles.button}
               checkedColor='red'
               >
               <Text style={styles.buttonText}>Login</Text>
             </TouchableHighlight>
-            {/* <LoginScreen /> */}
-            {/* <SingnupScreen /> */}
             <TouchableHighlight
-              onPress={this.handleLoginPress}
+              onPress={this.handleSingupPress}
               style={styles.button}
               checkedColor='red'
               >
               <Text style={styles.buttonText}>Singup</Text>
             </TouchableHighlight>
-            </View>
+            </View> : this.state.login ? <LoginScreen setLogin={this.props.setLogin}/> : <SingnupScreen setLogin={this.props.setLogin} />
+    }
           </KeyboardAvoidingView>
         </ImageBackground>
       </KeyboardAvoidingView>

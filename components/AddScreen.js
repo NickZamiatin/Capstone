@@ -104,7 +104,7 @@ class AddScreen extends Component {
 
     } catch (error) {
       alert('Something went wrong!');
-      console.warn(error.response);
+      // console.warn(error.response);
     }
 
     this.props.navigation.goBack();

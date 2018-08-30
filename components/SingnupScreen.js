@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
 main: {
 },
 container: {
-  marginTop:80
+  marginTop:70
 },
   text: {
     height: 55,
@@ -21,7 +21,7 @@ container: {
     borderRadius: 10,
   },
   title : {
-    marginTop: 100,
+    marginTop: 80,
     fontSize: 28,
     textAlign: 'center',
     color: 'white'
@@ -31,7 +31,7 @@ container: {
     backgroundColor: 'rgba(255, 149, 0, 1)',
     borderColor: 'orange',
     alignSelf: 'stretch',
-    margin: 40,
+    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
@@ -45,7 +45,9 @@ container: {
 class SingnupScreen extends Component {
   state = {
     email: '',
-    password: null
+    password: null,
+    passwordConfirm: null,
+
   };
 
   handleChangeLogin = (email) => {
@@ -58,6 +60,19 @@ class SingnupScreen extends Component {
       password: password,
     })
   }
+  handleChangePasswordConfirm = (passwordConfirm) => {
+    this.setState({
+      passwordConfirm: passwordConfirm,
+    })
+  }
+
+  passwordMatch = () => {
+    if(this.state.password == null){
+      return false
+    }
+    return this.state.password === this.state.passwordConfirm
+  }
+
 
   handleLoginPress = async () => {
     try {
@@ -65,9 +80,9 @@ class SingnupScreen extends Component {
         email: this.state.email,
         password: this.state.password,
       });
-      // await AsyncStorage.setItem('token', result.data.token)
-      // Axios.defaults.headers.common['Authorization'] = result.data.token;
-      // this.props.setLogin(true)
+      await AsyncStorage.setItem('token', result.data.token)
+      Axios.defaults.headers.common['Authorization'] = result.data.token;
+      this.props.setLogin(true)
     } catch (error) {
       alert('Incorect Email or password!');
       console.warn(error.message);
@@ -102,18 +117,19 @@ class SingnupScreen extends Component {
           />
           <TextInput
             style={[styles.text]}
-            onChangeText={this.handleChangePassword}
+            onChangeText={this.handleChangePasswordConfirm}
             placeholder="Confirm password"
             returnKeyType="done"
             secureTextEntry={false}
             spellCheck={false}
-            value={this.state.password}
+            value={this.state.passwordConfirm}
           />
        </View>
             <TouchableHighlight
               onPress={this.handleLoginPress}
               style={styles.button}
               checkedColor='red'
+              disabled={!this.passwordMatch()}
               >
               <Text style={styles.buttonText}>Create</Text>
             </TouchableHighlight>
