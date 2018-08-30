@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
 main: {
 },
 container: {
-  marginTop:80
+  marginTop:20
 },
   text: {
     height: 55,
@@ -21,7 +21,7 @@ container: {
     borderRadius: 10,
   },
   title : {
-    marginTop: 100,
+    marginTop: 330,
     fontSize: 28,
     textAlign: 'center',
     color: 'white'
@@ -79,7 +79,7 @@ class LoginScreen extends Component {
   render(){
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-      <ImageBackground source={{uri: 'https://snag.gy/ZsVG1k.jpg'}} style={{width: '100%', height: '100%'}}>
+      <ImageBackground source={{uri: 'https://images.unsplash.com/photo-1513012320598-efcf9b835a85?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2b05571d08fe79fd24036f2be7fafffb&auto=format&fit=crop&w=1500&q=80'}} style={{width: '100%', height: '100%'}}>
       <Text  style={[styles.title]}>FOCUS TIME </Text>
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
       <View style={[styles.main, styles.container]} behavior="padding" enabled>

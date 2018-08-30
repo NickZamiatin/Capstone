@@ -21,7 +21,7 @@ container: {
     borderRadius: 10,
   },
   title : {
-    marginTop: 80,
+    marginTop: 40,
     fontSize: 28,
     textAlign: 'center',
     color: 'white'
@@ -94,7 +94,7 @@ class SingnupScreen extends Component {
   render(){
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-      <ImageBackground source={{uri: 'https://snag.gy/ZsVG1k.jpg'}} style={{width: '100%', height: '100%'}}>
+      <ImageBackground source={{uri: 'https://images.unsplash.com/photo-1523204394441-474892d1f451?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3dc862376b70317af519f6478f172212&auto=format&fit=crop&w=2069&q=80'}} style={{width: '100%', height: '100%'}}>
       <Text  style={[styles.title]}>Welcome to Focus Time </Text>
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
       <View style={[styles.main, styles.container]} behavior="padding" enabled>
@@ -125,6 +125,7 @@ class SingnupScreen extends Component {
             value={this.state.passwordConfirm}
           />
        </View>
+          </KeyboardAvoidingView>
             <TouchableHighlight
               onPress={this.handleLoginPress}
               style={styles.button}
@@ -133,7 +134,6 @@ class SingnupScreen extends Component {
               >
               <Text style={styles.buttonText}>Create</Text>
             </TouchableHighlight>
-          </KeyboardAvoidingView>
         </ImageBackground>
       </KeyboardAvoidingView>
     )

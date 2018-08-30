@@ -25,17 +25,22 @@ class HomeScreen extends Component {
   renderEmptyComponent() {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" />;
+       <Text style={styles.loading}>This is a time management app that allows you to accomplish more in a shorter period of time,  lowers your stress, and helps you focus. 
+       Each benefit of time management improves another aspect of your life.
+       To start go to the screen create and add a Target. 
+       </Text>
+       <Text style={styles.loading}></Text>
       </View>
     )
 
-    if (this.state.loading) {
-      return (
-        <View style={styles.center}>
-          <ActivityIndicator size="large" />;
-        </View>
-      )
-    }
+    // if(this.props.events.length === 0) {
+    //   return (
+    //     <View style={styles.center}>
+    //       {/* <ActivityIndicator size="large" />; */}
+    //       <Text>Description about app</Text>
+    //     </View>
+    //   )
+    // }
     return (
       <View style={styles.center}>
         <Text>
@@ -140,9 +145,14 @@ const styles = StyleSheet.create({
   },
   center: {
     flex: 1,
-    marginTop : 300,
+    // marginTop : 300,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+  },
+  loading: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 25,
   }
 });
 

@@ -11,7 +11,8 @@ class PastScreen extends Component {
     super()
     this.timer = 0;
     this.renderItem = this.renderItem.bind(this);
-    this.renderEmptyComponent = this.renderEmptyComponent.bind(this);
+    this.renderEmptyComponent1 = this.renderEmptyComponent1.bind(this);
+    this.renderEmptyComponent2 = this.renderEmptyComponent2.bind(this);
   }
 
   state = {
@@ -23,27 +24,36 @@ class PastScreen extends Component {
     done: false
   }
 
-  renderEmptyComponent() {
+  renderEmptyComponent1() {
     return (
       <View style={styles.center}>
-        <ActivityIndicator size="large" />;
+       <Text style={styles.loading}>You can see a list of goals that have been completed.  </Text>
       </View>
     )
 
-    if (this.state.loading) {
-      return (
-        <View style={styles.center}>
-          <ActivityIndicator size="large" />;
-        </View>
-      )
-    }
+    // if (this.state.loading) {
+    //   return (
+    //     <View style={styles.center}>
+    //       <ActivityIndicator size="large" />;
+    //     </View>
+    //   )
+    // }
+    // return (
+    //   <View style={styles.center}>
+    //     <Text>
+    //       Nothing is here... Yet.
+    //     </Text>
+    //   </View>
+    // );
+  }
+
+  renderEmptyComponent2() {
     return (
       <View style={styles.center}>
-        <Text>
-          Nothing is here... Yet.
-        </Text>
+       <Text style={styles.loading}>You can see a list of goals that have expired.  </Text>
       </View>
-    );
+    )
+
   }
 
   deleteNote = async (id) => {
@@ -90,16 +100,16 @@ class PastScreen extends Component {
             style={styles.eventDone}
             renderItem={(item) => this.renderItem(item, "green")}
             keyExtractor={item => item.id.toString()}
-            ListEmptyComponent={this.renderEmptyComponent}
+            ListEmptyComponent={this.renderEmptyComponent1}
             contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
           />
-          <Text  style={styles.textTop}> Dont pass </Text>
+          <Text  style={styles.textTop}>Expired</Text>
           <FlatList
             data={this.props.eventExpiry}
             style={styles.eventExpiry}
             renderItem={(item) => this.renderItem(item, 'rgba(255, 0, 0, 1)')}
             keyExtractor={item => item.id.toString()}
-            ListEmptyComponent={this.renderEmptyComponent}
+            ListEmptyComponent={this.renderEmptyComponent2}
             contentContainerStyle={{ flexDirection: 'column', alignItems: 'stretch' }}
           />
         </View>
@@ -121,6 +131,7 @@ const styles = StyleSheet.create({
     color: 'white',
     margin:10,
     fontWeight: 'bold' ,
+    fontSize: 21,
     // textAlign: 'center',
 
   },
@@ -133,7 +144,7 @@ const styles = StyleSheet.create({
   },
   center: {
     flex: 1,
-    marginTop : 300,
+    // marginTop : 300,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -142,6 +153,11 @@ const styles = StyleSheet.create({
   },
   eventDone:{
     // backgroundColor: "blue"
+  },
+  loading:{
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 22,
   }
 });
 

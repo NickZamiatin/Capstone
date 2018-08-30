@@ -5,7 +5,7 @@ import AddScreen from "./components/AddScreen";
 import ReviewScreen from "./components/ReviewScreen";
 import PastScreen from "./components/PastScreen";
 import { createMaterialTopTabNavigator } from "react-navigation";
-import { scale as s } from "react-native-size-matters";
+import { scale as s, verticalScale } from "react-native-size-matters";
 import * as Api from './Api';
 import Axios from 'axios';
 import EntryScreen from "./components/EntryScreen";
@@ -70,7 +70,7 @@ export default class App extends Component {
 
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: "black", shadowColor: "red" }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: "black", shadowColor: "red"}}>
         <StatusBar barStyle="light-content" />
        { !this.state.isLoggedIn ? <EntryScreen setLogin={this.setLogin} /> :
          React.createElement(TabNavBar({
@@ -125,6 +125,9 @@ const TabNavBar = (props) => createMaterialTopTabNavigator(
       },
       indicatorStyle: {
         height: 0
+      },
+      headerTitleStyle: {
+        fontWeight: 'bold',
       },
       StatusBar: {
         backgroundColor: "blue",

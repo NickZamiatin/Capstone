@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor:  'rgba(0, 122, 255, 1)',
+    backgroundColor:  'rgba(0, 122, 255, 1)', /// works on it 
     width: '100%',
     height: 250,
     borderRadius: 10,
