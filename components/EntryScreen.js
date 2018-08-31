@@ -3,7 +3,6 @@ import Axios from 'axios';
 import LoginScreen from "./LoginScreen";
 import SingnupScreen from "./SingnupScreen";
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
-import Auth from '../auth'
 const styles = StyleSheet.create({
 
 main: {
@@ -54,10 +53,6 @@ container: {
   }
 })
 
-// examples of picks
-// https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=afbe9f5cf4e0194b07648afd2ab3e887&auto=format&fit=crop&w=1650&q=80
-// https://images.unsplash.com/photo-1524678714210-9917a6c619c2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0f077eae6a256063c3d662eec3f54eb4&auto=format&fit=crop&w=1649&q=80  need to chage color to orange and black
-
 class EntryScreen extends Component {
 
   state = {
@@ -65,13 +60,12 @@ class EntryScreen extends Component {
     singup: false
   }
 
-
-
   handleLoginPress = () => {
     this.setState({
       login: true
     })
   }
+
   handleSingupPress = () => {
     this.setState({
       singup: true
@@ -84,23 +78,22 @@ class EntryScreen extends Component {
       <View  style={[styles.container]}>
     {  (!this.state.login && !this.state.singup) ? <View style={styles.buttons}>
     <Text  style={[styles.title]}>FOCUS TIME </Text>
-
-              <TouchableHighlight
-              onPress={this.handleLoginPress}
-              style={styles.button}
-              checkedColor='red'
-              >
-              <Text style={styles.buttonText}>Login</Text>
-            </TouchableHighlight>
-            
-            <TouchableHighlight
-              onPress={this.handleSingupPress}
-              style={styles.button}
-              checkedColor='red'
-              >
-              <Text style={styles.buttonText}>Singup</Text>
-            </TouchableHighlight>
-            </View> : this.state.login ? <LoginScreen setLogin={this.props.setLogin}/> : <SingnupScreen setLogin={this.props.setLogin} />
+      <TouchableHighlight
+        onPress={this.handleLoginPress}
+        style={styles.button}
+        checkedColor='red'
+        >
+        <Text style={styles.buttonText}>Login</Text>
+      </TouchableHighlight>
+    
+      <TouchableHighlight
+        onPress={this.handleSingupPress}
+        style={styles.button}
+        checkedColor='red'
+      >
+      <Text style={styles.buttonText}>Singup</Text>
+      </TouchableHighlight>
+    </View> : this.state.login ? <LoginScreen setLogin={this.props.setLogin}/> : <SingnupScreen setLogin={this.props.setLogin} />
     }
     </View>
         </ImageBackground>

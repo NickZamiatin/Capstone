@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 
   card: {
-    backgroundColor:  'rgba(88, 86, 214, 2)', /// works on it 
+    backgroundColor:  'rgba(88, 86, 214, 2)',
     width: '100%',
     height: s (200),
     borderRadius: 10,
@@ -116,7 +116,6 @@ class ReviewScreen extends Component {
   get event() {
     if (!this.props.navigation.state.params) return null;
     const event = this.props.events.find(({ id }) => id === this.props.navigation.state.params.eventId);
-
     return event
 
   }
@@ -169,7 +168,6 @@ class ReviewScreen extends Component {
 
     } catch (error) {
       alert('Something went wrong!');
-      console.warn(error);
     }
 
   }
@@ -230,7 +228,7 @@ class ReviewScreen extends Component {
          onPress={this.pressUpdate}
          style={stylesForm.button}
          checkedColor='red'
-       >
+        >
          <Text style={stylesForm.buttonText}>Update</Text>
        </TouchableHighlight>
      </View>

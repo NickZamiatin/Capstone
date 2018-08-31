@@ -1,6 +1,5 @@
 import Axios from 'axios';
-import { AsyncStorage } from "react-native"
-import { relativeTimeRounding } from 'moment';
+
 
 const API_URL = 'https://expresstarget.herokuapp.com/auth/';
 const axios = Axios.create({

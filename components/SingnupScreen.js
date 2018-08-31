@@ -84,9 +84,8 @@ class SingnupScreen extends Component {
       Axios.defaults.headers.common['Authorization'] = result.data.token;
       this.props.setLogin(true)
     } catch (error) {
-      alert('Incorect Email or password!');
-      console.warn(error.message);
-      this.props.setLogin(false)
+        alert('Incorect Email or password!');
+        this.props.setLogin(false)
     }
 
   }
@@ -133,7 +132,6 @@ class SingnupScreen extends Component {
               >
               <Text style={styles.buttonText}>Create</Text>
             </TouchableHighlight>
-        {/* </ImageBackground> */}
       </KeyboardAvoidingView>
     )
   }

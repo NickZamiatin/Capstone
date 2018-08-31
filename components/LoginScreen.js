@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
 import Auth from '../auth'
-import { scale as s } from 'react-native-size-matters'
-
 
 const styles = StyleSheet.create({
 
@@ -72,44 +70,42 @@ class LoginScreen extends Component {
       this.props.setLogin(true)
     } catch (error) {
       alert('Incorect Email or password!');
-      console.warn(error.message);
       this.props.setLogin(false)
     }
-
   }
 
   render(){
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-      <Text  style={[styles.title]}>FOCUS TIME </Text>
-      <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
-      <View style={[styles.main, styles.container]} behavior="padding" enabled>
-         <TextInput
-            style={[styles.text]}
-            onChangeText={this.handleChangeLogin}
-            placeholder="Login"
-            returnKeyType="done"
-            spellCheck={false}
-            value={this.state.email}
-          />
-          <TextInput
-            style={[styles.text]}
-            onChangeText={this.handleChangePassword}
-            placeholder="Password"
-            returnKeyType="done"
-            secureTextEntry={false}
-            spellCheck={false}
-            value={this.state.password}
-          />
-            <TouchableHighlight
-              onPress={this.handleLoginPress}
-              style={styles.button}
-              checkedColor='red'
-              >
-              <Text style={styles.buttonText}>Login</Text>
-            </TouchableHighlight>
-       </View>
-          </KeyboardAvoidingView>
+        <Text  style={[styles.title]}>FOCUS TIME </Text>
+        <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
+          <View style={[styles.main, styles.container]} behavior="padding" enabled>
+            <TextInput
+                style={[styles.text]}
+                onChangeText={this.handleChangeLogin}
+                placeholder="Login"
+                returnKeyType="done"
+                spellCheck={false}
+                value={this.state.email}
+              />
+              <TextInput
+                style={[styles.text]}
+                onChangeText={this.handleChangePassword}
+                placeholder="Password"
+                returnKeyType="done"
+                secureTextEntry={false}
+                spellCheck={false}
+                value={this.state.password}
+              />
+                <TouchableHighlight
+                  onPress={this.handleLoginPress}
+                  style={styles.button}
+                  checkedColor='red'
+                  >
+                  <Text style={styles.buttonText}>Login</Text>
+                </TouchableHighlight>
+            </View>
+        </KeyboardAvoidingView>
       </KeyboardAvoidingView>
     )
   }

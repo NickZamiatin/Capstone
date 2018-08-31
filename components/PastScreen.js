@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, FlatList, Text, StyleSheet, TouchableOpacity, ActivityIndicator} from 'react-native';
+import {View, FlatList, Text, StyleSheet} from 'react-native';
 import CreateElement from './CreateElement';
 import Swipeout from 'react-native-swipeout';
 import { scale as s } from "react-native-size-matters";
@@ -60,9 +60,9 @@ class PastScreen extends Component {
     ];
     return (
       <Swipeout right={swipeBtns}
-      style={styles.buttDELETEDONE}
-      backgroundColor= 'transparent'>
-        <CreateElement event={item}  backgroundColor={color}/>
+        style={styles.buttDELETEDONE}
+        backgroundColor= 'transparent'>
+      <CreateElement event={item}  backgroundColor={color}/>
       </Swipeout>
     )
   }
@@ -107,7 +107,6 @@ const styles = StyleSheet.create({
     margin:10,
     fontWeight: 'bold' ,
     fontSize: 21,
-
   },
   buttDELETEDONE : {
     marginBottom: s(13),
@@ -120,10 +119,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  eventExpiry: {
-  },
-  eventDone:{
   },
   loading:{
     color: 'white',

@@ -53,7 +53,6 @@ class HomeScreen extends Component {
   
       } catch (error) {
         alert('Something went wrong!');
-      
   
       this.props.navigation.goBack();
     }
@@ -77,12 +76,12 @@ class HomeScreen extends Component {
     ];
     return (
       <Swipeout right={swipeBtns}
-      style={styles.buttDELETEDONE}
-      backgroundColor= 'transparent'>
+        style={styles.buttDELETEDONE}
+        backgroundColor= 'transparent'>
       <TouchableOpacity onPress={() => this.props.navigation.navigate('ReviewScreen', {
         eventId: item.id
       })}>
-        <CreateElement event={item}/>
+      <CreateElement event={item}/>
       </TouchableOpacity>
       </Swipeout>
     )
@@ -116,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  buttDELETEDONE : {
+  buttDELETEDONE: {
     marginBottom: s(9),
     borderBottomLeftRadius: s(13),
     borderBottomRightRadius: s(13),
