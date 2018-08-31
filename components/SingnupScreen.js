@@ -2,45 +2,45 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
 import Auth from '../auth'
+
 const styles = StyleSheet.create({
 
-main: {
-},
-container: {
-  marginTop:70
-},
-  text: {
-    height: 55,
-    margin: 10,
-    marginLeft: 7,
-    marginRight: 7,
-    paddingLeft: 10,
-    fontSize: 18,
-    color: 'black',
-    backgroundColor: 'white',
-    borderRadius: 10,
-  },
-  title : {
-    marginTop: 40,
-    fontSize: 28,
-    textAlign: 'center',
-    color: 'white'
-  },
-  button: {
-    height: 50,
-    backgroundColor: 'rgba(255, 149, 0, 1)',
-    borderColor: 'orange',
-    alignSelf: 'stretch',
-    margin: 10,
+  container: {
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15,
-  }
-})
-
-// examples of picks
-// https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=afbe9f5cf4e0194b07648afd2ab3e887&auto=format&fit=crop&w=1650&q=80
-// https://images.unsplash.com/photo-1524678714210-9917a6c619c2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0f077eae6a256063c3d662eec3f54eb4&auto=format&fit=crop&w=1649&q=80  need to chage color to orange and black
+  },
+    text: {
+      marginTop: 80,
+      height: 55,
+      margin: 10,
+      marginLeft: 7,
+      marginRight: 7,
+      paddingLeft: 10,
+      fontSize: 18,
+      color: 'black',
+      backgroundColor: 'white',
+      borderRadius: 10,
+      marginTop: 20,
+      width: 400,
+    },
+    title : {
+      marginTop: 170,
+      fontSize: 28,
+      textAlign: 'center',
+      color: 'white'
+    },
+    button: {
+      height: 50,
+      width: 400,
+      backgroundColor: 'rgba(255, 149, 0, 1)',
+      borderColor: 'orange',
+      alignSelf: 'stretch',
+      margin: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 15,
+    }
+  })
 
 class SingnupScreen extends Component {
   state = {
@@ -94,7 +94,6 @@ class SingnupScreen extends Component {
   render(){
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-      <ImageBackground source={{uri: 'https://images.unsplash.com/photo-1523204394441-474892d1f451?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3dc862376b70317af519f6478f172212&auto=format&fit=crop&w=2069&q=80'}} style={{width: '100%', height: '100%'}}>
       <Text  style={[styles.title]}>Welcome to Focus Time </Text>
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
       <View style={[styles.main, styles.container]} behavior="padding" enabled>
@@ -134,7 +133,7 @@ class SingnupScreen extends Component {
               >
               <Text style={styles.buttonText}>Create</Text>
             </TouchableHighlight>
-        </ImageBackground>
+        {/* </ImageBackground> */}
       </KeyboardAvoidingView>
     )
   }

@@ -2,14 +2,17 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
 import Auth from '../auth'
+import { scale as s } from 'react-native-size-matters'
+
+
 const styles = StyleSheet.create({
 
-main: {
-},
 container: {
-  marginTop:20
+  justifyContent: 'center',
+  alignItems: 'center',
 },
   text: {
+    marginTop: 80,
     height: 55,
     margin: 10,
     marginLeft: 7,
@@ -19,28 +22,27 @@ container: {
     color: 'black',
     backgroundColor: 'white',
     borderRadius: 10,
+    marginTop: 20,
+    width: 400,
   },
   title : {
-    marginTop: 330,
+    marginTop: 170,
     fontSize: 28,
     textAlign: 'center',
     color: 'white'
   },
   button: {
     height: 50,
+    width: 400,
     backgroundColor: 'rgba(255, 149, 0, 1)',
     borderColor: 'orange',
     alignSelf: 'stretch',
-    margin: 40,
+    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
   }
 })
-
-// examples of picks
-// https://images.unsplash.com/photo-1476820865390-c52aeebb9891?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=afbe9f5cf4e0194b07648afd2ab3e887&auto=format&fit=crop&w=1650&q=80
-// https://images.unsplash.com/photo-1524678714210-9917a6c619c2?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0f077eae6a256063c3d662eec3f54eb4&auto=format&fit=crop&w=1649&q=80  need to chage color to orange and black
 
 class LoginScreen extends Component {
   state = {
@@ -79,7 +81,6 @@ class LoginScreen extends Component {
   render(){
     return (
       <KeyboardAvoidingView behavior="padding" enabled>
-      <ImageBackground source={{uri: 'https://images.unsplash.com/photo-1513012320598-efcf9b835a85?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2b05571d08fe79fd24036f2be7fafffb&auto=format&fit=crop&w=1500&q=80'}} style={{width: '100%', height: '100%'}}>
       <Text  style={[styles.title]}>FOCUS TIME </Text>
       <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
       <View style={[styles.main, styles.container]} behavior="padding" enabled>
@@ -100,7 +101,6 @@ class LoginScreen extends Component {
             spellCheck={false}
             value={this.state.password}
           />
-       </View>
             <TouchableHighlight
               onPress={this.handleLoginPress}
               style={styles.button}
@@ -108,8 +108,8 @@ class LoginScreen extends Component {
               >
               <Text style={styles.buttonText}>Login</Text>
             </TouchableHighlight>
+       </View>
           </KeyboardAvoidingView>
-        </ImageBackground>
       </KeyboardAvoidingView>
     )
   }

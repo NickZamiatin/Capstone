@@ -11,11 +11,10 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: s(5),
     padding: s(10),
-    marginTop:s(40),
+    marginTop:s(20),
     alignItems: 'center',
   },
   buttonUpdate: {
-    height: 60,
     borderColor: 'white',
     textAlign: 'center',
     justifyContent: 'center',
@@ -26,18 +25,18 @@ const styles = StyleSheet.create({
     marginBottom: s(3),
     padding: s(10),
     fontSize: s(20),
+    fontWeight: 'bold'
   },
 
   card: {
-    backgroundColor:  'rgba(0, 122, 255, 1)', /// works on it 
+    backgroundColor:  'rgba(88, 86, 214, 2)', /// works on it 
     width: '100%',
-    height: 250,
+    height: s (200),
     borderRadius: 10,
-    paddingVertical: s(10),
-    paddingHorizontal: s(15),
   },
   title: {
-    marginBottom: s(13),
+    marginTop: s(20),
+    marginBottom: s(10),
     flexDirection: 'row',
     fontSize: s(26),
     fontWeight: 180,
@@ -116,9 +115,8 @@ class ReviewScreen extends Component {
 
   get event() {
     if (!this.props.navigation.state.params) return null;
-    // console.log(this.props.navigation.state.params)
     const event = this.props.events.find(({ id }) => id === this.props.navigation.state.params.eventId);
-    // console.log("EVENT ",event)
+
     return event
 
   }
@@ -189,7 +187,6 @@ class ReviewScreen extends Component {
           </View>
           <View >
             <TouchableOpacity onPress={this.pressEdit} >
-            {/* on press or difernt  */}
              <Text  style={styles.buttonUpdate}>
                Edit
              </Text>
@@ -197,11 +194,7 @@ class ReviewScreen extends Component {
            </View>
         </View>
       </View> :
-       <View
-       style={{
-         flex: 1,
-       }}
-     >
+       <View>
        <View style={stylesForm.fieldContainer}>
          <TextInput
            style={[stylesForm.text]}

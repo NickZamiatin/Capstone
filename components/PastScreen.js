@@ -4,7 +4,6 @@ import CreateElement from './CreateElement';
 import Swipeout from 'react-native-swipeout';
 import { scale as s } from "react-native-size-matters";
 import * as Api from '../Api';
-// PastScreen
 class PastScreen extends Component {
 
   constructor() {
@@ -30,21 +29,6 @@ class PastScreen extends Component {
        <Text style={styles.loading}>You can see a list of goals that have been completed.  </Text>
       </View>
     )
-
-    // if (this.state.loading) {
-    //   return (
-    //     <View style={styles.center}>
-    //       <ActivityIndicator size="large" />;
-    //     </View>
-    //   )
-    // }
-    // return (
-    //   <View style={styles.center}>
-    //     <Text>
-    //       Nothing is here... Yet.
-    //     </Text>
-    //   </View>
-    // );
   }
 
   renderEmptyComponent2() {
@@ -78,10 +62,6 @@ class PastScreen extends Component {
       <Swipeout right={swipeBtns}
       style={styles.buttDELETEDONE}
       backgroundColor= 'transparent'>
-      {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Home', {
-        eventId: item.id
-      })}>
-      </TouchableOpacity> */}
         <CreateElement event={item}  backgroundColor={color}/>
       </Swipeout>
     )
@@ -119,20 +99,14 @@ class PastScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    padding: s(20),
+    padding: s(10),
     flex: 1,
-  },
-  containerAdd: {
-    margin: s(30),
-    alignItems: 'center',
-    justifyContent: 'center',
   },
   textTop: {
     color: 'white',
     margin:10,
     fontWeight: 'bold' ,
     fontSize: 21,
-    // textAlign: 'center',
 
   },
   buttDELETEDONE : {
@@ -144,15 +118,12 @@ const styles = StyleSheet.create({
   },
   center: {
     flex: 1,
-    // marginTop : 300,
     justifyContent: 'center',
     alignItems: 'center'
   },
   eventExpiry: {
-    // backgroundColor: "red"
   },
   eventDone:{
-    // backgroundColor: "blue"
   },
   loading:{
     color: 'white',

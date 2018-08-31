@@ -104,7 +104,6 @@ class AddScreen extends Component {
 
     } catch (error) {
       alert('Something went wrong!');
-      // console.warn(error.response);
     }
 
     this.props.navigation.goBack();
@@ -120,7 +119,7 @@ class AddScreen extends Component {
         <View style={styles.fieldContainer}>
           <TextInput
             style={[styles.text]}
-            placeholder="Pick up a date"
+            placeholder="Pick a date"
             spellCheck={false}
             value={formatDateTime(this.state.date.toString())}
             editable={!this.state.showDatePicker}

@@ -32,26 +32,9 @@ class HomeScreen extends Component {
        <Text style={styles.loading}></Text>
       </View>
     )
-
-    // if(this.props.events.length === 0) {
-    //   return (
-    //     <View style={styles.center}>
-    //       {/* <ActivityIndicator size="large" />; */}
-    //       <Text>Description about app</Text>
-    //     </View>
-    //   )
-    // }
-    return (
-      <View style={styles.center}>
-        <Text>
-          Nothing is here... Yet.
-        </Text>
-      </View>
-    );
   }
 
   doneeNote = async (event) =>{
-    // console.log('Done function here', this.props.events[2].done)
     try {
       await Api.Targets.update(event.id,{
         ...event,
@@ -109,8 +92,6 @@ class HomeScreen extends Component {
     if (this.state.error) {
       return <Text>Something went wrong</Text>
     }
-    // if (!this.event) return null;
-    // const { navigate } = this.props.navigation;
     return (
         <View style={styles.container}>
           <FlatList
@@ -136,8 +117,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttDELETEDONE : {
-    // borderRadius: 10,
-    marginBottom: s(13),
+    marginBottom: s(9),
     borderBottomLeftRadius: s(13),
     borderBottomRightRadius: s(13),
     borderTopLeftRadius: s(13),
@@ -145,7 +125,6 @@ const styles = StyleSheet.create({
   },
   center: {
     flex: 1,
-    // marginTop : 300,
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -7,9 +7,13 @@ import Auth from '../auth'
 const styles = StyleSheet.create({
 
 main: {
+  justifyContent: 'center',
+  alignItems: 'center',
 },
 container: {
-  marginTop:80
+  justifyContent: 'center',
+  alignItems: 'center',
+
 },
   text: {
     height: 55,
@@ -21,25 +25,31 @@ container: {
     color: 'black',
     backgroundColor: 'white',
     borderRadius: 10,
+    marginTop: 20,
+    width: 400,
+
+  //  textAlign: 'center'
   },
   title : {
     marginTop: 100,
     fontSize: 28,
     textAlign: 'center',
-    color: 'white',
+    color: 'white'
   },
   button: {
     height: 50,
+    width: 400,
     backgroundColor: 'rgba(255, 149, 0, 1)',
     borderColor: 'orange',
     alignSelf: 'stretch',
-    margin: 3,
+    margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,
   },
   buttons: {
-    
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 380,
   }
 })
@@ -68,13 +78,10 @@ class EntryScreen extends Component {
     })
   }
 
-// https://images.unsplash.com/photo-1523204394441-474892d1f451?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3dc862376b70317af519f6478f172212&auto=format&fit=crop&w=2069&q=80
-  // https://images.unsplash.com/photo-1513012320598-efcf9b835a85?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=2b05571d08fe79fd24036f2be7fafffb&auto=format&fit=crop&w=1500&q=80
   render(){
     return (
-      <KeyboardAvoidingView behavior="padding" enabled>
-      <ImageBackground source={{uri: 'https://images.unsplash.com/photo-1496515304631-925c4d9ff926?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ee95efdae91f56e45cd12d94f3ff6e49&auto=format&fit=crop&w=1631&q=80'}} style={{width: '100%', height: '100%'}}>
-      
+      <ImageBackground source={{uri: 'https://images.unsplash.com/photo-1523204394441-474892d1f451?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3dc862376b70317af519f6478f172212&auto=format&fit=crop&w=2069&q=80'}} style={{width: '100%', height: '100%'}}>
+      <View  style={[styles.container]}>
     {  (!this.state.login && !this.state.singup) ? <View style={styles.buttons}>
     <Text  style={[styles.title]}>FOCUS TIME </Text>
 
@@ -95,10 +102,8 @@ class EntryScreen extends Component {
             </TouchableHighlight>
             </View> : this.state.login ? <LoginScreen setLogin={this.props.setLogin}/> : <SingnupScreen setLogin={this.props.setLogin} />
     }
+    </View>
         </ImageBackground>
-      {/* <KeyboardAvoidingView behavior="padding" enabled style={styles.container}>
-          </KeyboardAvoidingView> */}
-      </KeyboardAvoidingView>
     )
   }
 }
