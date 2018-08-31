@@ -1,6 +1,9 @@
 {
   "expo": {
-    "sdkVersion": "27.0.0"
-  }
+    "name": "Focus Time",
+    "slug": "FocusTime",
+    "sdkVersion": "UNVERSIONED",
+    "privacy": "public",
+    "version": "1.0.0"
+  } 
 }
-
