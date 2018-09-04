@@ -1,9 +1,19 @@
 {
   "expo": {
     "name": "Focus Time",
-    "slug": "FocusTime",
-    "sdkVersion": "UNVERSIONED",
+    "description": "This is a time management app that allows you to accomplish more in a shorter period of time,  lowers your stress, and helps you focus. Each benefit of time management improves another aspect of your life.",
+    "icon": "./icons/icon-512.png",
+    "slug": "focusTime",
+    "sdkVersion": "27.0.0",
     "privacy": "public",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "ios": {
+      "bundleIdentifier": "com.unsureprogrammer.focustime",
+      "supportsTablet": true
+    },
+    "android": {
+      "package":"com.unsureprogrammer.focustime"
+    },
+    "orientation": "portrait"
   } 
 }
