@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
       backgroundColor: 'white',
       borderRadius: 10,
       marginTop: 20,
-      width: 400,
+      width: 370,
     },
     title : {
       marginTop: 170,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     },
     button: {
       height: 50,
-      width: 400,
+      width: 370,
       backgroundColor: 'rgba(255, 149, 0, 1)',
       borderColor: 'orange',
       alignSelf: 'stretch',
@@ -109,7 +109,7 @@ class SingnupScreen extends Component {
             onChangeText={this.handleChangePassword}
             placeholder="Password"
             returnKeyType="done"
-            secureTextEntry={false}
+            secureTextEntry={true}
             spellCheck={false}
             value={this.state.password}
           />
@@ -118,7 +118,7 @@ class SingnupScreen extends Component {
             onChangeText={this.handleChangePasswordConfirm}
             placeholder="Confirm password"
             returnKeyType="done"
-            secureTextEntry={false}
+            secureTextEntry={true}
             spellCheck={false}
             value={this.state.passwordConfirm}
           />

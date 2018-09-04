@@ -37,7 +37,7 @@ container: {
   },
   button: {
     height: 50,
-    width: 400,
+    width: 370,
     backgroundColor: 'rgba(255, 149, 0, 1)',
     borderColor: 'orange',
     alignSelf: 'stretch',

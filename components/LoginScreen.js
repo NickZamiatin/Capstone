@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
 import Auth from '../auth'
+import { scale as s } from "react-native-size-matters";
+
 
 const styles = StyleSheet.create({
 
@@ -13,15 +15,15 @@ container: {
     marginTop: 80,
     height: 55,
     margin: 10,
-    marginLeft: 7,
-    marginRight: 7,
+    marginLeft: s(10),
+    marginRight: s(10),
     paddingLeft: 10,
     fontSize: 18,
     color: 'black',
     backgroundColor: 'white',
     borderRadius: 10,
     marginTop: 20,
-    width: 400,
+    width: 370,
   },
   title : {
     marginTop: 170,
@@ -31,7 +33,7 @@ container: {
   },
   button: {
     height: 50,
-    width: 400,
+    width: 370,
     backgroundColor: 'rgba(255, 149, 0, 1)',
     borderColor: 'orange',
     alignSelf: 'stretch',
@@ -93,7 +95,7 @@ class LoginScreen extends Component {
                 onChangeText={this.handleChangePassword}
                 placeholder="Password"
                 returnKeyType="done"
-                secureTextEntry={false}
+                secureTextEntry={true}
                 spellCheck={false}
                 value={this.state.password}
               />
