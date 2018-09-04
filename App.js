@@ -58,9 +58,9 @@ export default class App extends Component {
   
 
   async componentDidMount() {
-    const token = null
-    // const token = await AsyncStorage.getItem('token')
-    // Axios.defaults.headers.common['Authorization'] = token;
+    // const token = null
+    const token = await AsyncStorage.getItem('token')
+    Axios.defaults.headers.common['Authorization'] = token;
 
     if (token){
       this.setState({
