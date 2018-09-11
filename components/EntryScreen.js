@@ -3,6 +3,9 @@ import Axios from 'axios';
 import LoginScreen from "./LoginScreen";
 import SingnupScreen from "./SingnupScreen";
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
+import {connect} from 'react-redux'
+
+
 const styles = StyleSheet.create({
 
 main: {
@@ -53,33 +56,31 @@ container: {
   }
 })
 
+function mapStateToProps(state){
+  return {
+    login: state.login,
+    singup: state.singup
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    handleLoginPress : () => dispatch({ type : 'LOGIN' }),
+    handleSingupPress : () => dispatch({ type : 'SIGNUP' }) 
+  }
+}
+
 class EntryScreen extends Component {
 
-  state = {
-    login: false,
-    singup: false
-  }
-
-  handleLoginPress = () => {
-    this.setState({
-      login: true
-    })
-  }
-
-  handleSingupPress = () => {
-    this.setState({
-      singup: true
-    })
-  }
 
   render(){
     return (
       <ImageBackground source={{uri: 'https://images.unsplash.com/photo-1523204394441-474892d1f451?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3dc862376b70317af519f6478f172212&auto=format&fit=crop&w=2069&q=80'}} style={{width: '100%', height: '100%'}}>
       <View  style={[styles.container]}>
-    {  (!this.state.login && !this.state.singup) ? <View style={styles.buttons}>
+    {  (!this.props.login && !this.props.singup) ? <View style={styles.buttons}>
     <Text  style={[styles.title]}>FOCUS TIME </Text>
       <TouchableHighlight
-        onPress={this.handleLoginPress}
+        onPress={this.props.handleLoginPress}
         style={styles.button}
         checkedColor='red'
         >
@@ -87,13 +88,13 @@ class EntryScreen extends Component {
       </TouchableHighlight>
     
       <TouchableHighlight
-        onPress={this.handleSingupPress}
+        onPress={this.props.handleSingupPress}
         style={styles.button}
         checkedColor='red'
       >
-      <Text style={styles.buttonText}>Singup</Text>
+      <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableHighlight>
-    </View> : this.state.login ? <LoginScreen setLogin={this.props.setLogin}/> : <SingnupScreen setLogin={this.props.setLogin} />
+    </View> : this.props.login ? <LoginScreen setLogin={this.props.setLogin}/> : <SingnupScreen setLogin={this.props.setLogin} />
     }
     </View>
         </ImageBackground>
@@ -101,4 +102,4 @@ class EntryScreen extends Component {
   }
 }
 
-export default EntryScreen
+export default connect(mapStateToProps, mapDispatchToProps)(EntryScreen)

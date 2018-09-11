@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Axios from 'axios';
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
 import Auth from '../auth'
+import {connect} from 'react-redux'
 
 const styles = StyleSheet.create({
 
@@ -42,43 +43,59 @@ const styles = StyleSheet.create({
     }
   })
 
+  function mapStateToProps(state){
+    return {
+      email: state.email,
+      password: state.password,
+      passwordConfirm: state.passwordConfirm
+    }
+  }
+  
+  function mapDispatchToProps(dispatch){
+    return {
+      handleChangeLogin : (email) => dispatch({ type : 'EMAIL', email }),
+      handleChangePassword : (password) => dispatch({ type : 'PASSWORD', password }),
+      handleChangePasswordConfirm : (passwordConfirm) => dispatch({ type : 'PASSWORDCONFIRM', passwordConfirm }) 
+    }
+  }
+
 class SingnupScreen extends Component {
-  state = {
-    email: '',
-    password: null,
-    passwordConfirm: null,
+  // state = {
+  //   email: '',
+  //   password: null,
+  //   passwordConfirm: null,
 
-  };
+  // };
 
-  handleChangeLogin = (email) => {
-    this.setState({
-      email: email,
-    })
-  }
-  handleChangePassword = (password) => {
-    this.setState({
-      password: password,
-    })
-  }
-  handleChangePasswordConfirm = (passwordConfirm) => {
-    this.setState({
-      passwordConfirm: passwordConfirm,
-    })
-  }
+  // handleChangeLogin = (email) => {
+  //   this.setState({
+  //     email: email,
+  //   })
+  // }
+  // handleChangePassword = (password) => {
+  //   this.setState({
+  //     password: password,
+  //   })
+  // }
+  // handleChangePasswordConfirm = (passwordConfirm) => {
+  //   this.setState({
+  //     passwordConfirm: passwordConfirm,
+  //   })
+  // }
 
   passwordMatch = () => {
-    if(this.state.password == null){
+    if(this.props.password == null){
       return false
     }
-    return this.state.password === this.state.passwordConfirm
+    return this.props.password === this.props.passwordConfirm
   }
 
 
   handleLoginPress = async () => {
     try {
     const result = await Auth.signup({
-        email: this.state.email,
-        password: this.state.password,
+        email: this.props.email,
+        password: this.props.password,
       });
       await AsyncStorage.setItem('token', result.data.token)
       Axios.defaults.headers.common['Authorization'] = result.data.token;
@@ -98,29 +115,29 @@ class SingnupScreen extends Component {
       <View style={[styles.main, styles.container]} behavior="padding" enabled>
          <TextInput
             style={[styles.text]}
-            onChangeText={this.handleChangeLogin}
+            onChangeText={this.props.handleChangeLogin}
             placeholder="Login"
             returnKeyType="done"
             spellCheck={false}
-            value={this.state.email}
+            value={this.props.email}
           />
           <TextInput
             style={[styles.text]}
-            onChangeText={this.handleChangePassword}
+            onChangeText={this.props.handleChangePassword}
             placeholder="Password"
             returnKeyType="done"
             secureTextEntry={true}
             spellCheck={false}
-            value={this.state.password}
+            value={this.props.password}
           />
           <TextInput
             style={[styles.text]}
-            onChangeText={this.handleChangePasswordConfirm}
+            onChangeText={this.props.handleChangePasswordConfirm}
             placeholder="Confirm password"
             returnKeyType="done"
             secureTextEntry={true}
             spellCheck={false}
-            value={this.state.passwordConfirm}
+            value={this.props.passwordConfirm}
           />
        </View>
           </KeyboardAvoidingView>
@@ -137,4 +154,4 @@ class SingnupScreen extends Component {
   }
 }
 
-export default SingnupScreen
+export default connect(mapStateToProps, mapDispatchToProps)(SingnupScreen)

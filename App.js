@@ -7,8 +7,56 @@ import PastScreen from "./components/PastScreen";
 import { createMaterialTopTabNavigator } from "react-navigation";
 import { scale as s, verticalScale } from "react-native-size-matters";
 import * as Api from './Api';
+import reducer from './store/index';
 import Axios from 'axios';
+import {createStore} from 'redux'
 import EntryScreen from "./components/EntryScreen";
+import {Provider} from 'react-redux'
+
+
+// const initialState = {
+//   login: false,
+//   singup: false,
+//   email: '',
+//   password: null,
+//   passwordConfirm: null,
+// }
+
+// const reducer = (state = initialState, action) => {
+//   switch(action.type)
+//   {
+//     case 'LOGIN':
+//     return {
+//       ...state,
+//       login:  true
+//     }
+//     case 'SIGNUP':
+//     return {
+//       ...state,
+//       singup:  true
+//     } 
+//     case 'EMAIL':
+//     return {
+//       ...state,
+//       email:  action.email
+//     } 
+//     case 'PASSWORD':
+//     return {
+//       ...state,
+//       password:  action.password
+//     } 
+//     case 'PASSWORDCONFIRM':
+//     return {
+//       ...state,
+//       passwordConfirm:  action.passwordConfirm
+//     } 
+//    }
+
+//   return state
+// }
+// const store = createStore(reducer)
+
+const store = createStore(reducer);
 
 export default class App extends Component {
 
@@ -72,6 +120,7 @@ export default class App extends Component {
 
   render() {
     return (
+      <Provider store={store}>
       <SafeAreaView style={{ flex: 1, backgroundColor: "black", shadowColor: "red"}}>
         <StatusBar barStyle="light-content" />
        { !this.state.isLoggedIn ? <EntryScreen setLogin={this.setLogin} /> :
@@ -83,6 +132,7 @@ export default class App extends Component {
         }))
        }
       </SafeAreaView>
+      </Provider>
     );
   }
 }
@@ -129,7 +179,7 @@ const TabNavBar = (props) => createMaterialTopTabNavigator(
         height: 0
       },
       headerTitleStyle: {
-        fontWeight: 'bold',
+      fontWeight: 'bold',
       },
       StatusBar: {
         backgroundColor: "blue",

@@ -3,6 +3,7 @@ import Axios from 'axios';
 import {View , AsyncStorage ,Text, StyleSheet, TextInput, ImageBackground, KeyboardAvoidingView, TouchableHighlight} from "react-native";
 import Auth from '../auth'
 import { scale as s } from "react-native-size-matters";
+import {connect} from 'react-redux'
 
 
 const styles = StyleSheet.create({
@@ -44,28 +45,28 @@ container: {
   }
 })
 
-class LoginScreen extends Component {
-  state = {
-    email: '',
-    password: null
-  };
 
-  handleChangeLogin = (email) => {
-    this.setState({
-      email: email,
-    })
+function mapStateToProps(state){
+  return {
+    email: state.email,
+    password: state.password
   }
-  handleChangePassword = (password) => {
-    this.setState({
-      password: password,
-    })
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    handleChangeLogin : (email) => dispatch({ type : 'EMAIL', email }),
+    handleChangePassword : (password) => dispatch({ type : 'PASSWORD', password }) 
   }
+}
+
+class LoginScreen extends Component {
 
   handleLoginPress = async () => {
     try {
     const result = await Auth.login({
-        email: this.state.email,
-        password: this.state.password,
+        email: this.props.email,
+        password: this.props.password,
       });
       await AsyncStorage.setItem('token', result.data.token)
       Axios.defaults.headers.common['Authorization'] = result.data.token;
@@ -84,20 +85,20 @@ class LoginScreen extends Component {
           <View style={[styles.main, styles.container]} behavior="padding" enabled>
             <TextInput
                 style={[styles.text]}
-                onChangeText={this.handleChangeLogin}
+                onChangeText={this.props.handleChangeLogin}
                 placeholder="Login"
                 returnKeyType="done"
                 spellCheck={false}
-                value={this.state.email}
+                value={this.props.email}
               />
               <TextInput
                 style={[styles.text]}
-                onChangeText={this.handleChangePassword}
+                onChangeText={this.props.handleChangePassword}
                 placeholder="Password"
                 returnKeyType="done"
                 secureTextEntry={true}
                 spellCheck={false}
-                value={this.state.password}
+                value={this.props.password}
               />
                 <TouchableHighlight
                   onPress={this.handleLoginPress}
@@ -113,4 +114,4 @@ class LoginScreen extends Component {
   }
 }
 
-export default LoginScreen
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)

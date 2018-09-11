@@ -13,15 +13,6 @@ class HomeScreen extends Component {
     this.renderEmptyComponent = this.renderEmptyComponent.bind(this);
   }
 
-  state = {
-    error: null,
-    loading: true,
-    title: '',
-    date: '',
-    note: '',
-    done: false
-  }
-
   renderEmptyComponent() {
     return (
       <View style={styles.center}>
@@ -88,9 +79,6 @@ class HomeScreen extends Component {
   }
 
   render(){
-    if (this.state.error) {
-      return <Text>Something went wrong</Text>
-    }
     return (
         <View style={styles.container}>
           <FlatList

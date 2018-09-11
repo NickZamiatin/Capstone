@@ -30,6 +30,7 @@
     "react-native-size-matters": "^0.1.2",
     "react-native-swipeout": "^2.3.6",
     "react-navigation": "^2.11.2",
-    "react-navigation-material-bottom-tabs": "^0.3.0"
+    "react-navigation-material-bottom-tabs": "^0.3.0",
+    "react-redux": "^5.0.7"
   }
 }
